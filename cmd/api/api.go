@@ -17,7 +17,10 @@ func Run() {
 	app := fiber.New()
 
 	app.Get("/api/user", handlers.HandleGetUser)
+	app.Get("/api/user/:id", handlers.HandleGetUserByID)
 	app.Post("/api/user", handlers.HandleCreateUser)
+	app.Post("/api/user/:id", handlers.HandleUpdateUser)
+	app.Delete("/api/user/:id", handlers.HandleDeleteUser)
 
 	app.Listen(":3000")
 }
