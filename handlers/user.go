@@ -10,11 +10,12 @@ type User struct {
 
 func HandleGetUser(c *fiber.Ctx) error {
 
-	user := User{
-		ID:       1,
-		Username: "User01",
-		Email:    "user01@email.com",
-	}
+	return c.JSON("hello user")
+}
 
-	return c.JSON(user)
+func HandleCreateUser(c *fiber.Ctx) error {
+	u := User{}
+	c.BodyParser(&u)
+
+	return c.JSON(u)
 }
