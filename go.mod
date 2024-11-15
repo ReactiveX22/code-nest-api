@@ -2,13 +2,13 @@ module ReactiveX22/code-nest-api
 
 go 1.23.2
 
-require github.com/gofiber/fiber/v2 v2.52.5
-
 require (
-	github.com/joho/godotenv v1.5.1 // indirect
-	golang.org/x/crypto v0.28.0 // indirect
-	mellium.im/sasl v0.3.2 // indirect
+	github.com/gofiber/fiber/v2 v2.52.5
+	github.com/joho/godotenv v1.5.1
+	golang.org/x/crypto v0.28.0
 )
+
+require mellium.im/sasl v0.3.2 // indirect
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
@@ -21,7 +21,7 @@ require (
 	github.com/puzpuzpuz/xsync/v3 v3.4.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
-	github.com/uptrace/bun v1.2.5 // indirect
+	github.com/uptrace/bun v1.2.5
 	github.com/uptrace/bun/dialect/pgdialect v1.2.5
 	github.com/uptrace/bun/driver/pgdriver v1.2.5
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
