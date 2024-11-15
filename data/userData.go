@@ -75,6 +75,7 @@ func UpdateUser(ctx context.Context, id int, updateUserReq UpdateUserRequest) (*
 		Model(userToUpdate).
 		ExcludeColumn("created_at").
 		Where("id = ?", id).
+		OmitZero().
 		Returning("*").
 		Scan(ctx, updatedUser)
 
@@ -93,7 +94,7 @@ func DeleteUser(ctx context.Context, id int) error {
 	}
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		return err // Handle any error from RowsAffected
+		return err
 	}
 	if rowsAffected == 0 {
 		return fmt.Errorf("user with id %d not found", id)

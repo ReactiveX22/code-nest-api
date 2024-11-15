@@ -16,11 +16,19 @@ func Run() {
 
 	app := fiber.New()
 
-	app.Get("/api/user", handlers.HandleGetUser)
-	app.Get("/api/user/:id", handlers.HandleGetUserByID)
-	app.Post("/api/user", handlers.HandleCreateUser)
-	app.Post("/api/user/:id", handlers.HandleUpdateUser)
-	app.Delete("/api/user/:id", handlers.HandleDeleteUser)
+	// users
+	app.Get("/api/users", handlers.HandleGetUser)
+	app.Get("/api/users/:id", handlers.HandleGetUserByID)
+	app.Post("/api/users", handlers.HandleCreateUser)
+	app.Patch("/api/users/:id", handlers.HandleUpdateUser)
+	app.Delete("/api/users/:id", handlers.HandleDeleteUser)
+
+	// posts
+	app.Get("/api/posts", handlers.HandleGetPost)
+	app.Get("/api/posts/:id", handlers.HandleGetPostByID)
+	app.Post("/api/posts", handlers.HandleCreatePost)
+	app.Patch("/api/posts/:id", handlers.HandleUpdatePost)
+	app.Delete("/api/posts/:id", handlers.HandleDeletePost)
 
 	app.Listen(":3000")
 }

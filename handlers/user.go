@@ -2,16 +2,13 @@ package handlers
 
 import (
 	"ReactiveX22/code-nest-api/data"
-	"errors"
-	"log"
-	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func HandleGetUser(c *fiber.Ctx) error {
 
-	return c.JSON("hello user")
+	return c.JSON("Do not get all users for now")
 }
 
 func HandleCreateUser(c *fiber.Ctx) error {
@@ -90,22 +87,4 @@ func HandleDeleteUser(c *fiber.Ctx) error {
 		"message": "User deleted successfully",
 		"userId":  id,
 	})
-}
-
-// utility functions
-func handleError(c *fiber.Ctx, status int, err error, message string) error {
-	log.Printf("%s: %v", message, err)
-	return c.Status(status).JSON(fiber.Map{
-		"error":   message,
-		"message": err.Error(),
-	})
-}
-
-func ParseID(c *fiber.Ctx) (int, error) {
-	params := c.Params("id")
-	id, err := strconv.Atoi(params)
-	if err != nil {
-		return 0, errors.New("invalid user ID format")
-	}
-	return id, nil
 }

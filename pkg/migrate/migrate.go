@@ -14,20 +14,21 @@ func main() {
 
 	db.InitDB()
 	db := db.DB
-	userMigration := &migrations.UserMigration{}
+
+	migrationManager := migrations.NewMigrationManager()
 
 	if *upFlag {
-		err := userMigration.Up(db)
+		err := migrationManager.RunMigrations(db, true)
 		if err != nil {
 			log.Fatalf("Migration failed: %v", err)
 		}
-		log.Println("Migration completed successfully.")
+		log.Println("Migrations completed successfully.")
 	} else if *downFlag {
-		err := userMigration.Down(db)
+		err := migrationManager.RunMigrations(db, false)
 		if err != nil {
 			log.Fatalf("Migration failed: %v", err)
 		}
-		log.Println("Migration completed successfully.")
+		log.Println("Migrations rolled back successfully.")
 	} else {
 		log.Println("No migration was run. Use the --up or --down flag to run migrations.")
 	}
