@@ -55,3 +55,22 @@ func CreateSession(ctx context.Context, loginReq LoginRequest) (*Session, error)
 
 	return session, nil
 }
+
+func DeleteSession(ctx context.Context, sessionToken string) error {
+	result, err := db.DB.NewDelete().
+		Model(&Session{}).
+		Where("token = ?", sessionToken).
+		Exec(ctx)
+	if err != nil {
+		log.Printf("Error deleting session with token %s: %v", sessionToken, err)
+		return err
+	}
+
+	rowsAffected, _ := result.RowsAffected()
+	if rowsAffected == 0 {
+		log.Printf("No session found for token %s", sessionToken)
+		return nil
+	}
+
+	return nil
+}
