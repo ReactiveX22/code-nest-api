@@ -30,5 +30,10 @@ func Run() {
 	app.Patch("/api/posts/:id", handlers.HandleUpdatePost)
 	app.Delete("/api/posts/:id", handlers.HandleDeletePost)
 
+	// auth
+	auth := app.Group("/api/auth")
+	auth.Post("/login", handlers.HandleLogin)
+	auth.Post("/logout", handlers.HandleLogout)
+
 	app.Listen(":3000")
 }

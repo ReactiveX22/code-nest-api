@@ -46,11 +46,27 @@ type Post struct {
 
 type CreatePostRequest struct {
 	AuthorID int64  `json:"authorId"`
-	Title    string `bun:"title,notnull" json:"title"`
+	Title    string `json:"title"`
 	Content  string `json:"content"`
 }
+
 type UpdatePostRequest struct {
 	AuthorID int64  `json:"authorId"`
-	Title    string `bun:"title,notnull" json:"title"`
+	Title    string `json:"title"`
 	Content  string `json:"content"`
+}
+
+// Session types
+
+type Session struct {
+	bun.BaseModel `bun:"table:sessions,alias:s"`
+
+	Token    string    `bun:"token,pk,notnull,unique" json:"token"`
+	UserID   int64     `bun:"user_id,notnull,unique" json:"-"`
+	ExpireAt time.Time `bun:"expire_at,notnull" json:"-"`
+}
+
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }

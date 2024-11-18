@@ -26,7 +26,14 @@ func (m *UserMigration) Up(db *bun.DB) error {
 }
 
 func (m *UserMigration) Down(db *bun.DB) error {
-	_, err := db.NewDropTable().Model((*data.Post)(nil)).IfExists().Exec(context.Background())
+	_, err := db.NewDropTable().Model((*data.Session)(nil)).IfExists().Exec(context.Background())
+	if err != nil {
+		log.Fatalf("Failed to drop dependent table posts: %v", err)
+		return err
+	}
+	log.Println("Dependent table sessions dropped successfully")
+
+	_, err = db.NewDropTable().Model((*data.Post)(nil)).IfExists().Exec(context.Background())
 	if err != nil {
 		log.Fatalf("Failed to drop dependent table posts: %v", err)
 		return err

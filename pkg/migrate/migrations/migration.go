@@ -11,6 +11,7 @@ func NewMigrationManager() *MigrationManager {
 		migrations: []Migration{
 			&UserMigration{},
 			&PostMigration{},
+			&SessionMigration{},
 		},
 	}
 }
